@@ -30,7 +30,7 @@ namespace File_FileInfo
             }
             */
 
-            string path = @"c:\Projetos\file1.txt";
+            /*string path = @"c:\Projetos\file1.txt";
            
             StreamReader sr = null;
 
@@ -54,6 +54,28 @@ namespace File_FileInfo
                 if (sr != null) sr.Close();
                 
             }
+            */
+
+            string path = @"c:\Projetos\file1.txt";
+            try
+            {
+
+                using (StreamReader sr = File.OpenText(path))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        Console.WriteLine(line);
+                    }
+                }
+
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred");
+                Console.WriteLine(e.Message);
+            }
+
 
         }
     }
