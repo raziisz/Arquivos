@@ -10,10 +10,17 @@ namespace File_FileInfo
             
             string sourcePath = @"c:\Projetos\file1.txt";
             string targetPath = @"c:\Projetos\file2.txt";
+            
 
             try{
                 FileInfo fileInfo = new FileInfo(sourcePath);
                 fileInfo.CopyTo(targetPath);
+                string[] lines = File.ReadAllLines(sourcePath);
+
+                foreach (string line in lines)
+                {
+                    Console.WriteLine(line);
+                }
 
             } catch(IOException e)
             {
