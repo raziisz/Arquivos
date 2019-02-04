@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace File_FileInfo
@@ -56,11 +57,21 @@ namespace File_FileInfo
             }
             */
 
-            string path = @"c:\Projetos\file1.txt";
+            /*string sourcePath = @"c:\Projetos\file1.txt";
+            string targetPath = @"c:\Projetos\file2.txt";
             try
             {
+                string[] lines = File.ReadAllLines(sourcePath);
 
-                using (StreamReader sr = File.OpenText(path))
+                using(StreamWriter sw = File.AppendText(targetPath))
+                {
+                    foreach(string line in lines)
+                    {
+                        sw.WriteLine(line.ToUpper());
+                    }
+                }
+
+                using(StreamReader sr = File.OpenText(targetPath))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -69,8 +80,38 @@ namespace File_FileInfo
                     }
                 }
 
+                
+
+               
+
             }
             catch (IOException e)
+            {
+                Console.WriteLine("An error occurred");
+                Console.WriteLine(e.Message);
+            } */
+
+            string path = @"c:\Projetos\myfolder";
+
+            try
+            {
+                IEnumerable<string> folders =  Directory.EnumerateDirectories(path, "*.*", SearchOption.AllDirectories);
+                Console.WriteLine("FOLDERS");
+                foreach (string s in folders)
+                {
+                    Console.WriteLine(s);
+                }
+
+                IEnumerable<string> files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories);
+                Console.WriteLine("FILES");
+                foreach (string s in files)
+                {
+                    Console.WriteLine(s);
+                }
+
+                Directory.CreateDirectory(path + "\\newfolder");
+
+            } catch(IOException e)
             {
                 Console.WriteLine("An error occurred");
                 Console.WriteLine(e.Message);
